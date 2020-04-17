@@ -1,4 +1,4 @@
-module cmap
+module github.com/goprag/cmap
 
 go 1.14
 
