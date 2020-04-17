@@ -1,0 +1,39 @@
+# These objects set up a service account for cmap-test to use configmaps
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cmap-test
+  namespace: cmap-test
+  labels:
+    name: cmap-test
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: cmap-test
+  namespace: cmap-test
+  labels:
+    name: cmap-test
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - configmaps
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: cmap-test
+  namespace: cmap-test
+  labels:
+    name: cmap-test
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: cmap-test
+subjects:
+- kind: ServiceAccount
+  name: cmap-test
+  namespace: cmap-test
